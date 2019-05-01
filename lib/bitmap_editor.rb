@@ -10,6 +10,9 @@ class BitmapEditor
       begin
         command, *args = line.chomp.split(" ")
         case command
+        when "L"
+          # Colours the pixel (X,Y) with colour C.
+          @bitmap.colour_pixel(*args)
         when "I"
           # Create a new M x N image with all pixels coloured white (O).
           @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
@@ -20,6 +23,7 @@ class BitmapEditor
           puts "unrecognised command :("
         end
       rescue => exception
+        puts exception
       end
     end
   end

@@ -5,6 +5,7 @@ describe BitmapEditor do
   let(:z_file_path) { examples_file_path("z.txt") }
   let(:s_file_path) { examples_file_path("s.txt") }
   let(:i_file_path) { examples_file_path("i.txt") }
+  let(:l_file_path) { examples_file_path("l.txt") }
 
   describe "#run" do
     context "when commands file does not exists" do
@@ -31,6 +32,12 @@ describe BitmapEditor do
       it "returns 6x5 image output if file with 'I 5 6' command" do
         expect { subject.run(i_file_path) }.to(
           output("OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n").to_stdout
+        )
+      end
+
+      it "returns 6x5 image output and 'A' at [1, 3] position" do
+        expect { subject.run(l_file_path) }.to(
+          output("OOOOO\nOOOOO\nAOOOO\nOOOOO\nOOOOO\nOOOOO\n").to_stdout
         )
       end
     end
