@@ -10,6 +10,9 @@ class BitmapEditor
       begin
         command, *args = line.chomp.split(" ")
         case command
+        when "H"
+          # Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
+          @bitmap.set_horizontal_segment(*args)
         when "V"
           # Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).
           @bitmap.set_vertical_segment(*args)

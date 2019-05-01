@@ -26,4 +26,10 @@ class Bitmap
       @pixels[y - 1][x.to_i - 1] = colour
     end
   end
+
+  def set_horizontal_segment(x1, x2, y, colour)
+    (x1.to_i..x2.to_i).each do |x|
+      @pixels[y.to_i - 1][x - 1] = colour
+    end
+  end
 end

@@ -36,4 +36,12 @@ describe Bitmap do
       expect(bitmap.print).to eq(["OOOOO", "OOOOO", "OWOOO", "OWOOO", "OWOOO", "OWOOO"])
     end
   end
+
+  describe "#set_horizontal_segment" do
+    let(:bitmap){ Bitmap.new(5, 6) }
+    it "returns an empty bitmap after clear" do
+      bitmap.set_horizontal_segment(3, 5, 2, "Z")
+      expect(bitmap.print).to eq(["OOOOO", "OOZZZ", "OOOOO", "OOOOO", "OOOOO", "OOOOO"])
+    end
+  end
 end

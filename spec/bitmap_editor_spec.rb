@@ -55,6 +55,12 @@ describe BitmapEditor do
           output("OOOOO\nOOOOO\nOWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
         )
       end
+
+      it "returns 6x5 image output with a horizontal segment made by 'H' command" do
+        expect { subject.run(h_file_path) }.to(
+          output("OOOOO\nOOZZZ\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n").to_stdout
+        )
+      end
     end
   end
 end
