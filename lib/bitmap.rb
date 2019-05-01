@@ -20,4 +20,10 @@ class Bitmap
   def clear
     @pixels = Matrix.build(@rows, @columns){ "O" }.to_a
   end
+
+  def set_vertical_segment(x, y1, y2, colour)
+    (y1.to_i..y2.to_i).each do |y|
+      @pixels[y - 1][x.to_i - 1] = colour
+    end
+  end
 end

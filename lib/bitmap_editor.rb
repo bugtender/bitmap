@@ -10,6 +10,9 @@ class BitmapEditor
       begin
         command, *args = line.chomp.split(" ")
         case command
+        when "V"
+          # Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).
+          @bitmap.set_vertical_segment(*args)
         when "C"
           # Clears the table, setting all pixels to white (O).
           @bitmap.clear

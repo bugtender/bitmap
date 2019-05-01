@@ -7,6 +7,8 @@ describe BitmapEditor do
   let(:i_file_path) { examples_file_path("i.txt") }
   let(:l_file_path) { examples_file_path("l.txt") }
   let(:c_file_path) { examples_file_path("c.txt") }
+  let(:v_file_path) { examples_file_path("v.txt") }
+  let(:h_file_path) { examples_file_path("h.txt") }
 
   describe "#run" do
     context "when commands file does not exists" do
@@ -45,6 +47,12 @@ describe BitmapEditor do
       it "returns 6x5 image output after 'C' clear command" do
         expect { subject.run(c_file_path) }.to(
           output("OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n").to_stdout
+        )
+      end
+
+      it "returns 6x5 image output with a vertical segment made by 'V' command" do
+        expect { subject.run(v_file_path) }.to(
+          output("OOOOO\nOOOOO\nOWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
         )
       end
     end

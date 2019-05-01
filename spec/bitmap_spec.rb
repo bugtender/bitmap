@@ -28,4 +28,12 @@ describe Bitmap do
       expect(bitmap.print).to eq(["OOOOO", "OOOOO", "OOOOO", "OOOOO", "OOOOO", "OOOOO"])
     end
   end
+
+  describe "#set_vertical_segment" do
+    let(:bitmap){ Bitmap.new(5, 6) }
+    it "returns an bitmap with a vertical segment" do
+      bitmap.set_vertical_segment(2, 3, 6, "W")
+      expect(bitmap.print).to eq(["OOOOO", "OOOOO", "OWOOO", "OWOOO", "OWOOO", "OWOOO"])
+    end
+  end
 end
