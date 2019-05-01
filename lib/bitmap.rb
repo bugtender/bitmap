@@ -16,4 +16,8 @@ class Bitmap
   def colour_pixel(x, y, colour)
     @pixels[y.to_i-1][x.to_i-1] = colour
   end
+
+  def clear
+    @pixels = Matrix.build(@rows, @columns){ "O" }.to_a
+  end
 end

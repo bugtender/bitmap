@@ -10,6 +10,9 @@ class BitmapEditor
       begin
         command, *args = line.chomp.split(" ")
         case command
+        when "C"
+          # Clears the table, setting all pixels to white (O).
+          @bitmap.clear
         when "L"
           # Colours the pixel (X,Y) with colour C.
           @bitmap.colour_pixel(*args)

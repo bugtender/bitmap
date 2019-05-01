@@ -13,9 +13,19 @@ describe Bitmap do
 
   describe "#colour_pixel" do
     let(:bitmap){ Bitmap.new(5, 6) }
-    it "returns an empty bitmap by default" do
+    it "returns an bitmap with colour 'A' on [1, 3] position" do
       bitmap.colour_pixel(1, 3, "A")
       expect(bitmap.print).to eq(["OOOOO", "OOOOO", "AOOOO", "OOOOO", "OOOOO", "OOOOO"])
+    end
+  end
+
+  describe "#clear" do
+    let(:bitmap){ Bitmap.new(5, 6) }
+    it "returns an empty bitmap after clear" do
+      bitmap.colour_pixel(2, 4, "A")
+      expect(bitmap.print).to eq(["OOOOO", "OOOOO", "OOOOO", "OAOOO", "OOOOO", "OOOOO"])
+      bitmap.clear
+      expect(bitmap.print).to eq(["OOOOO", "OOOOO", "OOOOO", "OOOOO", "OOOOO", "OOOOO"])
     end
   end
 end
