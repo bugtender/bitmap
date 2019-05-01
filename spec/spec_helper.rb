@@ -95,4 +95,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  def examples_file_path(file_name)
+    File.expand_path("examples/#{file_name}", File.dirname(__FILE__))
+  end
 end
