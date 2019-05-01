@@ -5,16 +5,21 @@ class BitmapEditor
 
   def run(file)
     return puts "please provide correct file" if file.nil? || !File.exists?(file)
-
-    File.open(file).each do |line|
-      line = line.chomp
-      @bitmap = Bitmap.new
-      case line
-      when "S"
-        # Show the contents of the current image
-        puts @bitmap.print
-      else
-        puts "unrecognised command :("
+    @bitmap = Bitmap.new
+    File.open(file).each_line do |line|
+      begin
+        command, *args = line.chomp.split(" ")
+        case command
+        when "I"
+          # Create a new M x N image with all pixels coloured white (O).
+          @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
+        when "S"
+          # Show the contents of the current image
+          puts @bitmap.print
+        else
+          puts "unrecognised command :("
+        end
+      rescue => exception
       end
     end
   end
