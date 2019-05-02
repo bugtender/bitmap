@@ -1,0 +1,33 @@
+
+AllCops:
+  Exclude:
+    - 'spec/examples/**/*'
+  DisplayCopNames: true
+  TargetRubyVersion: 2.3
+
+Documentation:
+  Enabled: false
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+
+Layout/IndentFirstHashElement:
+  EnforcedStyle: consistent
+
+Metrics/MethodLength:
+  Max: 50
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
