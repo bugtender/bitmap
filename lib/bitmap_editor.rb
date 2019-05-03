@@ -11,19 +11,18 @@ class BitmapEditor
       begin
         command, *args = line.chomp.split(" ")
         case command
+        when "I"
+          @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
+        when "L"
+          @bitmap.colour_pixel(*args)
         when "H"
           @bitmap.set_horizontal_segment(*args)
         when "V"
           @bitmap.set_vertical_segment(*args)
         when "C"
           @bitmap.clear
-        when "L"
-          @bitmap.colour_pixel(*args)
-        when "I"
-          @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
         when "S"
-          return puts "Can't print bitmap without initialize it" unless @bitmap
-          puts @bitmap.print
+          print_bitmap
         else
           puts "unrecognised command :("
         end
@@ -31,5 +30,13 @@ class BitmapEditor
         puts exception
       end
     end
+  end
+
+  private
+
+  def print_bitmap
+    return puts "Can't print bitmap without initialize it" unless @bitmap
+
+    puts @bitmap.print
   end
 end
