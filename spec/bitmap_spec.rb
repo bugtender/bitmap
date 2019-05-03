@@ -34,10 +34,14 @@ describe Bitmap do
       bitmap.colour_pixel(1, 3, "A")
       expect(bitmap.print).to eq %w[OOOOO OOOOO AOOOO OOOOO OOOOO OOOOO]
     end
+
+    it "returns an InvalidCoordinatesError if pixel out of bitmap" do
+      expect { bitmap.colour_pixel(1, 7, "A") }
+        .to raise_error(Bitmap::InvalidCoordinatesError)
+    end
   end
 
   describe "#clear" do
-    let(:bitmap) { Bitmap.new(5, 6) }
     it "returns an empty bitmap after clear" do
       bitmap.colour_pixel(2, 4, "A")
       expect(bitmap.print).to eq %w[OOOOO OOOOO OOOOO OAOOO OOOOO OOOOO]
@@ -47,18 +51,26 @@ describe Bitmap do
   end
 
   describe "#set_vertical_segment" do
-    let(:bitmap) { Bitmap.new(5, 6) }
     it "returns an bitmap with a vertical segment" do
       bitmap.set_vertical_segment(2, 3, 6, "W")
       expect(bitmap.print).to eq %w[OOOOO OOOOO OWOOO OWOOO OWOOO OWOOO]
     end
+
+    it "returns an InvalidCoordinatesError if pixel out of bitmap" do
+      expect { bitmap.set_vertical_segment(2, 0, 6, "W") }
+        .to raise_error(Bitmap::InvalidCoordinatesError)
+    end
   end
 
   describe "#set_horizontal_segment" do
-    let(:bitmap) { Bitmap.new(5, 6) }
-    it "returns an empty bitmap after clear" do
+    it "returns an bitmap with a horizontal segment" do
       bitmap.set_horizontal_segment(3, 5, 2, "Z")
       expect(bitmap.print).to eq %w[OOOOO OOZZZ OOOOO OOOOO OOOOO OOOOO]
+    end
+
+    it "returns an InvalidCoordinatesError if pixel out of bitmap" do
+      expect { bitmap.set_horizontal_segment(2, 0, 6, "W") }
+        .to raise_error(Bitmap::InvalidCoordinatesError)
     end
   end
 end
