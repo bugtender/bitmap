@@ -9,19 +9,19 @@ class BitmapEditor
 
     File.open(file).each_line do |line|
       begin
-        command, *args = line.chomp.split(" ")
-        case command
-        when "I"
-          @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
-        when "L"
+        _command, *args = line.chomp.split(" ")
+        case line
+        when /I (\d+) (\d+)/i
+          @bitmap = Bitmap.new(*args)
+        when /L (\d+) (\d+) ([A-Z])/i
           @bitmap.colour_pixel(*args)
-        when "H"
+        when /H (\d+) (\d+) (\d+) ([A-Z])/i
           @bitmap.set_horizontal_segment(*args)
-        when "V"
+        when /V (\d+) (\d+) (\d+) ([A-Z])/i
           @bitmap.set_vertical_segment(*args)
-        when "C"
+        when /C/i
           @bitmap.clear
-        when "S"
+        when /S/i
           print_bitmap
         else
           puts "unrecognised command :("

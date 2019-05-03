@@ -10,9 +10,8 @@ class Bitmap
   class InvalidCoordinatesError < StandardError; end
   attr_reader :rows, :columns, :pixels
 
-  def initialize(columns = 0, rows = 0)
-    @rows = rows
-    @columns = columns
+  def initialize(columns, rows)
+    @columns, @rows = coordinates(columns, rows)
     validate_rows_and_columns
     create_pixels
   end

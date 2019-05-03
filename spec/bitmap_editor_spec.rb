@@ -11,6 +11,7 @@ describe BitmapEditor do
   let(:c_file_path) { examples_file_path("c.txt") }
   let(:v_file_path) { examples_file_path("v.txt") }
   let(:h_file_path) { examples_file_path("h.txt") }
+  let(:invalid_command_file_path) { examples_file_path("invalid_command.txt") }
 
   describe "#run" do
     context "when commands file does not exists" do
@@ -67,6 +68,14 @@ describe BitmapEditor do
       it "returns 6x5 image output with a horizontal segment made by 'H' command" do
         expect { subject.run(h_file_path) }.to(
           output("OOOOO\nOOZZZ\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n").to_stdout
+        )
+      end
+    end
+
+    context "when invalid params commands file exists" do
+      it "returns unrecognised output if file with an invalid params" do
+        expect { subject.run(invalid_command_file_path) }.to(
+          output(/unrecognised command :\(/).to_stdout
         )
       end
     end
