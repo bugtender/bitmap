@@ -3,12 +3,15 @@
 require "matrix"
 
 class Bitmap
+  class InvalidRangeError < StandardError; end
+
   attr_reader :rows, :columns, :pixels
 
   def initialize(columns = 0, rows = 0)
     @rows = rows
     @columns = columns
-    @pixels = Matrix.build(rows, columns){ "O" }.to_a
+    validate_rows_and_columns
+    @pixels = Matrix.build(rows, columns) { "O" }.to_a
   end
 
   def print
@@ -33,5 +36,12 @@ class Bitmap
     (x1.to_i..x2.to_i).each do |x|
       @pixels[y.to_i - 1][x - 1] = colour
     end
+  end
+
+  private
+
+  def validate_rows_and_columns
+    raise InvalidRangeError, "Invalid columns number [1~250]." if @columns > 250 || @columns < 1
+    raise InvalidRangeError, "Invalid Rows number [1~250]." if @rows > 250 || @rows < 1
   end
 end

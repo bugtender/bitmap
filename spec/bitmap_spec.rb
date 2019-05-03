@@ -3,18 +3,33 @@
 require "spec_helper"
 
 describe Bitmap do
-  describe "#print" do
-    it "returns an empty bitmap by default" do
-      expect(Bitmap.new.print).to eq([])
+  let(:bitmap) { Bitmap.new(5, 6) }
+
+  describe ".new" do
+    it "create a bitmap with exactly row & columns" do
+      expect(bitmap.columns).to eq 5
+      expect(bitmap.rows).to eq 6
+      expect(bitmap.pixels).to eq(
+        [%w[O O O O O], %w[O O O O O], %w[O O O O O],
+         %w[O O O O O], %w[O O O O O], %w[O O O O O],]
+      )
     end
 
+    it "create a bitmap with row & columns between 1~250" do
+      expect { Bitmap.new(251, 1) }.to raise_error(Bitmap::InvalidRangeError)
+      expect { Bitmap.new(1, 251) }.to raise_error(Bitmap::InvalidRangeError)
+      expect { Bitmap.new(251, 251) }.to raise_error(Bitmap::InvalidRangeError)
+      expect { Bitmap.new(0, 0) }.to raise_error(Bitmap::InvalidRangeError)
+    end
+  end
+
+  describe "#print" do
     it "returns an empty 6x5 bitmap" do
-      expect(Bitmap.new(5, 6).print).to eq %w[OOOOO OOOOO OOOOO OOOOO OOOOO OOOOO]
+      expect(bitmap.print).to eq %w[OOOOO OOOOO OOOOO OOOOO OOOOO OOOOO]
     end
   end
 
   describe "#colour_pixel" do
-    let(:bitmap){ Bitmap.new(5, 6) }
     it "returns an bitmap with colour 'A' on [1, 3] position" do
       bitmap.colour_pixel(1, 3, "A")
       expect(bitmap.print).to eq %w[OOOOO OOOOO AOOOO OOOOO OOOOO OOOOO]

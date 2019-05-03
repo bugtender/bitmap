@@ -19,6 +19,12 @@ describe BitmapEditor do
           output(/please provide correct file/).to_stdout
         )
       end
+
+      it "returns incorrect output message if not specify file" do
+        expect { subject.run(nil) }.to(
+          output(/please provide correct file/).to_stdout
+        )
+      end
     end
 
     context "when commands file exists" do
@@ -30,7 +36,7 @@ describe BitmapEditor do
 
       it "returns empty image output if file with 'S' command without 'I'" do
         expect { subject.run(s_file_path) }.to(
-          output("").to_stdout
+          output(/Can't print bitmap without initialize it/).to_stdout
         )
       end
 

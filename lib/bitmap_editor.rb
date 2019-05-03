@@ -7,7 +7,6 @@ class BitmapEditor
   def run(file)
     return puts "please provide correct file" if file.nil? || !File.exist?(file)
 
-    @bitmap = Bitmap.new
     File.open(file).each_line do |line|
       begin
         command, *args = line.chomp.split(" ")
@@ -23,6 +22,7 @@ class BitmapEditor
         when "I"
           @bitmap = Bitmap.new(args.first.to_i, args.last.to_i)
         when "S"
+          return puts "Can't print bitmap without initialize it" unless @bitmap
           puts @bitmap.print
         else
           puts "unrecognised command :("
